@@ -44,14 +44,15 @@ export default class DrumMachine extends React.Component {
   }
 
   startClock = () => {
-    this.audioEngine.startClock(this.state.pattern.beatsPerMinute);
+    this.audioEngine.startClock(this.state.customBeatsPerMinute);
 
     this.setState({ playing: true });
   }
+
   stopClock = () => {
     this.audioEngine.stopClock();
 
-    this.setState({ playing: false});
+    this.setState({ playing: false });
   }
 
   onStep = ({
@@ -64,17 +65,31 @@ export default class DrumMachine extends React.Component {
     if (index < 0) index = this.state.patterns.length - 1;
     if (index >= this.state.patterns.length) index = 0;
     const pattern = this.state.patterns[index]
+
     if (this.state.playing) {
       this.stopClock();
     }
 
-
     fetch(`${apiHost}/drumbot/patterns/${pattern.name}`).then(r => r.json()).then(
       pattern => {
-        this.setState({ pattern, patternIndex: index, loading: false });
+        this.setState({
+          pattern,
+          patternIndex: index,
+          customBeatsPerMinute: pattern.beatsPerMinute,
+          loading: false
+        });
+
         this.audioEngine.setPattern(pattern);
       }
     );
+  }
+
+  setCustomBeatsPerMinute(bpm) {
+    this.setState({ customBeatsPerMinute: bpm })
+
+    if (this.state.playing) {
+      this.stopClock();
+    }
   }
 
   nextPattern = () => {
@@ -83,6 +98,14 @@ export default class DrumMachine extends React.Component {
 
   previousPattern = () => {
     this.selectPattern(this.state.patternIndex - 1);
+  }
+
+  increaseBeatsPerMinute = () => {
+    this.setCustomBeatsPerMinute(this.state.customBeatsPerMinute + 1);
+  }
+
+  decreaseBeatsPerMinute = () => {
+    this.setCustomBeatsPerMinute(this.state.customBeatsPerMinute - 1);
   }
 
   render() {
@@ -128,6 +151,17 @@ export default class DrumMachine extends React.Component {
                 </div>
                 <div className='DrumMachine__PatternButton'>
                   <button onClick={this.nextPattern}>&gt;</button>
+                </div>
+              </div>
+              <div className='DrumMachine__BeatsPerMinuteSelector'>
+                <div className='DrumMachine__BeatsPerMinuteButton'>
+                  <button onClick={this.decreaseBeatsPerMinute}>&#45;</button>
+                </div>
+                <div className='DrumMachine__BeatsPerMinute'>
+                  {this.state.customBeatsPerMinute}
+                </div>
+                <div className='DrumMachine__BeatsPerMinuteButton'>
+                  <button onClick={this.increaseBeatsPerMinute}>&#43;</button>
                 </div>
               </div>
               <div className='DrumMachine__Transport'>

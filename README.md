@@ -56,7 +56,7 @@ The sounds are found in the `public/samples` folder. Try replacing these with yo
 
 If you're feeling adventurous, try synthesizing your own drum sounds using [oscillators](https://developer.mozilla.org/en-US/docs/Web/API/BaseAudioContext/createOscillator).
 
-#### Change the speed!
+#### Change the speed! :heavy_check_mark:
 
 This drum machine doesn't let you set the tempo. Try adding a tempo control!
 

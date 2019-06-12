@@ -69,7 +69,7 @@ button:disabled {
   text-align: left;
 
   font-family: 'Righteous', monospace;
-  font-size: 20px;
+  font-size: 16px;
   text-align: left;
   color: white;
 }
@@ -82,12 +82,12 @@ button:disabled {
 }
 
 
-.DrumMachine__PatternSelector, .DrumMachine__Transport {
+.DrumMachine__PatternSelector, .DrumMachine__Transport, .DrumMachine__BeatsPerMinuteSelector {
   display: flex;
   margin-top: 15px;
 }
 
-.DrumMachine__PatternSelector {
+.DrumMachine__PatternSelector, .DrumMachine__BeatsPerMinuteSelector {
   font-family: 'VT323', monospace;
   font-weight: bold;
   color: yellow;
@@ -96,7 +96,7 @@ button:disabled {
   height: 40px;
 }
 
-.DrumMachine__PatternButton button{
+.DrumMachine__PatternButton button, .DrumMachine__BeatsPerMinuteButton button {
   background: black;
   font-family: 'VT323', monospace;
   font-weight: bold;
@@ -106,11 +106,11 @@ button:disabled {
   padding: 0 10px;
 }
 
-.DrumMachine__PatternButton {
+.DrumMachine__PatternButton, .DrumMachine__BeatsPerMinuteButton {
   flex: 0 1 30px;
 }
 
-.DrumMachine__SelectedPattern {
+.DrumMachine__SelectedPattern, .DrumMachine__BeatsPerMinute {
   background: black;
   text-align: center;
   background-color: #222222;
@@ -131,7 +131,7 @@ button:disabled {
     text-align: right;
   }
 
-  .DrumMachine__PatternSelector {
+  .DrumMachine__PatternSelector, .DrumMachine__BeatsPerMinuteSelector {
     margin-right: 20px;
   }
 

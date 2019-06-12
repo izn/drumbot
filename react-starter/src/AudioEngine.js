@@ -55,6 +55,7 @@ export default class AudioEngine {
 
   startClock = (beatsPerMinute) => {
     this.stepsPerSecond = beatsPerMinute / 60 * 4;
+
     this.context = createNewContext();
 
     this.playing = true;
